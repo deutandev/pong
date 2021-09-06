@@ -54,5 +54,23 @@ public class PlayerControl : MonoBehaviour
  
         // Assign the velocity to rigidBody2D.
         rigidBody2D.velocity = velocity;
+
+        // Get current racket position.
+        Vector3 position = transform.position;
+ 
+        // If racket position exceeds upper boundary (yBoundary), return the racket to upper boundary.
+        if (position.y > yBoundary)
+        {
+            position.y = yBoundary;
+        }
+ 
+        // If racket position exceeds lower boundary (-yBoundary), return the racket to lower boundary.
+        else if (position.y < -yBoundary)
+        {
+            position.y = -yBoundary;
+        }
+ 
+        // Assign the position
+        transform.position = position;
     }
 }
