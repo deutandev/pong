@@ -72,5 +72,22 @@ public class PlayerControl : MonoBehaviour
  
         // Assign the position
         transform.position = position;
+
+        // Increase score by 1 point
+        public void IncrementScore()
+        {
+            score++;
+        }
+
+        // Reset score to 0
+        public void ResetScore()
+        {
+            score = 0;
+        }
+
+        // get socre        public int Score
+        {
+            get { return score; }
+        }
     }
 }
