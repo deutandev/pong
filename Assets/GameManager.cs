@@ -20,7 +20,11 @@ public class GameManager : MonoBehaviour
     public int maxScore;
 
     // Toggle Debug window
-    private bool isDebugWindowShown = true;
+    private bool isDebugWindowShown = false;
+
+    
+    // Objek untuk menggambar prediksi lintasan bola
+    public Trajectory trajectory;
 
     // Start is called before the first frame update
     // Initiate Rigid bodies and colliders
@@ -112,12 +116,14 @@ public class GameManager : MonoBehaviour
 
             // Revert to old GUI color
             GUI.backgroundColor = oldColor;
-
-            // Toggle debug window value if player press this button.
-            if (GUI.Button(new Rect(Screen.width/2 - 60, Screen.height - 73, 120, 53), "TOGGLE\nDEBUG INFO"))
-            {
-                isDebugWindowShown = !isDebugWindowShown;
-            }
         }
+
+        // Toggle nilai debug window ketika pemain mengeklik tombol ini.
+        if (GUI.Button(new Rect(Screen.width/2 - 60, Screen.height - 73, 120, 53), "TOGGLE\nDEBUG INFO"))
+        {
+            isDebugWindowShown = !isDebugWindowShown;
+        }
+
+        trajectory.enabled = !trajectory.enabled;
     }
 }
