@@ -9,6 +9,9 @@ public class BallControl : MonoBehaviour
     public float xInitialForce;
     public float yInitialForce;
 
+    // Current Ball trajectory origin
+    private Vector2 trajectoryOrigin;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -16,6 +19,8 @@ public class BallControl : MonoBehaviour
 
         // Start the game
         RestartGame();
+
+        trajectoryOrigin = transform.position;
     }
 
     // Update is called once per frame
@@ -61,5 +66,15 @@ public class BallControl : MonoBehaviour
         Invoke("PushBall", 2);
     }
 
-    
+    // When the ball move after a collision, record contact point
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        trajectoryOrigin = transform.position;
+    }
+
+    // access information about trajectory origin
+    public Vector2 TrajectoryOrigin
+    {
+        get { return trajectoryOrigin; }
+    }
 }

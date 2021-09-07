@@ -321,7 +321,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea3f9e5216206552ba16341782260ecb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameManager: {fileID: 0}
+  gameManager: {fileID: 1120380978}
   player: {fileID: 1247020384}
 --- !u!1 &922558220
 GameObject:
@@ -484,7 +484,7 @@ MonoBehaviour:
   player1: {fileID: 1247020384}
   player2: {fileID: 1840016288}
   ball: {fileID: 1826886975}
-  maxScore: 0
+  maxScore: 5
 --- !u!4 &1120380979
 Transform:
   m_ObjectHideFlags: 0
@@ -604,7 +604,7 @@ GameObject:
   - component: {fileID: 1826886976}
   - component: {fileID: 1826886975}
   m_Layer: 0
-  m_Name: ball
+  m_Name: Ball
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

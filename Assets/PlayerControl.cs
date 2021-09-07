@@ -21,6 +21,9 @@ public class PlayerControl : MonoBehaviour
 
     // Player1 score
     private int score;
+
+    // Last contact point with the ball
+    private ContactPoint2D lastContactPoint;
     
     // Start is called before the first frame update
     void Start()
@@ -90,5 +93,20 @@ public class PlayerControl : MonoBehaviour
     public int Score
     {
         get { return score; }
+    }
+
+    // Access last contact point from other class
+    public ContactPoint2D LastContactPoint
+    {
+        get { return lastContactPoint; }
+    }
+
+    // When collide with the ball, record the contact point.
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(collision.gameObject.name.Equals("Ball"))
+        {
+            lastContactPoint = collision.GetContact(0);
+        }
     }
 }

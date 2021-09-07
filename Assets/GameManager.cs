@@ -19,6 +19,9 @@ public class GameManager : MonoBehaviour
 
     public int maxScore;
 
+    // Toggle Debug window
+    private bool isDebugWindowShown = true;
+
     // Start is called before the first frame update
     // Initiate Rigid bodies and colliders
     private void Start()
@@ -70,6 +73,51 @@ public class GameManager : MonoBehaviour
  
             // ...and reset ball position to center.
             ball.SendMessage("ResetBall", null, SendMessageOptions.RequireReceiver);
+        }
+
+        // If isDebugWindowShown == true, show text area for debug window.
+        if (isDebugWindowShown)
+        {
+            // save old GUI color
+            Color oldColor = GUI.backgroundColor;
+
+            // Give new color
+            GUI.backgroundColor = Color.red;
+
+            // Physics variables. 
+            float ballMass = ballRigidbody.mass;
+            Vector2 ballVelocity = ballRigidbody.velocity;
+            float ballSpeed = ballRigidbody.velocity.magnitude;
+            Vector2 ballMomentum = ballMass * ballVelocity; 
+            float ballFriction = ballCollider.friction;
+ 
+            float impulsePlayer1X = player1.LastContactPoint.normalImpulse;
+            float impulsePlayer1Y = player1.LastContactPoint.tangentImpulse;
+            float impulsePlayer2X = player2.LastContactPoint.normalImpulse;
+            float impulsePlayer2Y = player2.LastContactPoint.tangentImpulse;
+
+            string debugText = 
+                "Ball mass = " + ballMass+ "\n" +
+                "Ball velocity = " + ballVelocity + "\n" +
+                "Ball speed = " + ballSpeed + "\n" +
+                "Ball momentum = " + ballMomentum + "\n" +
+                "Ball friction = " + ballFriction + "\n" +
+                "Last impulse from player 1 = (" + impulsePlayer1X + ", " + impulsePlayer1Y + ")\n" +
+                "Last impulse from player 2 = (" + impulsePlayer2X + ", " + impulsePlayer2Y + ")\n";
+
+            // Show debug window
+            GUIStyle guiStyle = new GUIStyle(GUI.skin.textArea);
+            guiStyle.alignment = TextAnchor.UpperCenter;
+            GUI.TextArea(new Rect(Screen.width/2 - 200, Screen.height - 200, 400, 110), debugText, guiStyle);
+
+            // Revert to old GUI color
+            GUI.backgroundColor = oldColor;
+
+            // Toggle debug window value if player press this button.
+            if (GUI.Button(new Rect(Screen.width/2 - 60, Screen.height - 73, 120, 53), "TOGGLE\nDEBUG INFO"))
+            {
+                isDebugWindowShown = !isDebugWindowShown;
+            }
         }
     }
 }
